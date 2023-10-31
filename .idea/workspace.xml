@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ef6faf05-e5bd-4fdc-af2c-96730b8206db" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/unilink.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/resume-ai-server.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/cv/migrations/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unilink/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unilink/asgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/asgi.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unilink/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unilink/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unilink/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/unilink/wsgi.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/wsgi.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resume-ai/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resume-ai/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -282,7 +275,7 @@
       <workItem from="1693299902775" duration="1194000" />
       <workItem from="1698724235035" duration="108000" />
       <workItem from="1698724412697" duration="377000" />
-      <workItem from="1698724804633" duration="255000" />
+      <workItem from="1698724804633" duration="489000" />
     </task>
     <servers />
   </component>
