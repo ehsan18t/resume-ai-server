@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/unilink.iml" filepath="$PROJECT_DIR$/.idea/unilink.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/resume-ai-server.iml" filepath="$PROJECT_DIR$/.idea/resume-ai-server.iml" />
     </modules>
   </component>
 </project>
