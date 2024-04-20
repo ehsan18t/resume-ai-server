@@ -6,16 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="ef6faf05-e5bd-4fdc-af2c-96730b8206db" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cv/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cv/admin.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cv/apps.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cv/migrations/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cv/models.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cv/tests.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cv/urls.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cv/views.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/resume-ai/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resume-ai/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -295,7 +285,8 @@
       <workItem from="1702360843988" duration="795000" />
       <workItem from="1702445332290" duration="8000" />
       <workItem from="1713616198253" duration="59000" />
-      <workItem from="1713616367145" duration="2237000" />
+      <workItem from="1713616367145" duration="2442000" />
+      <workItem from="1713619154400" duration="310000" />
     </task>
     <servers />
   </component>
