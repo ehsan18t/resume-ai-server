@@ -11,7 +11,6 @@ from rest_framework_simplejwt.views import (
 )
 from os import getenv
 
-from forum.models import Forum
 from users.models import UserAccount
 from users.permissions import AdminToStudent
 from users.serializers import UserAccountSerializer

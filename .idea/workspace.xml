@@ -6,9 +6,62 @@
   <component name="ChangeListManager">
     <list default="true" id="ef6faf05-e5bd-4fdc-af2c-96730b8206db" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cv/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/cv/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/chat/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/course/views.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/cv/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/cv/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/department/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/department/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/department/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/department/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/department/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/department/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/department/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/department/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/department/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/forum/views.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resume-ai/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resume-ai/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/serializers.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/tests/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/tests/test-case.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/tests/test_apis.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/tests/test_urls_pattern.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/urls.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/university/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/serializers.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/serializers.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,6 +76,7 @@
       <list>
         <option value="Freeze Requirements File" />
         <option value="Python Script" />
+        <option value="Setup Script" />
       </list>
     </option>
   </component>
@@ -275,7 +329,19 @@
       <workItem from="1693299902775" duration="1194000" />
       <workItem from="1698724235035" duration="108000" />
       <workItem from="1698724412697" duration="377000" />
-      <workItem from="1698724804633" duration="2505000" />
+      <workItem from="1698724804633" duration="5623000" />
+      <workItem from="1699123718132" duration="29000" />
+      <workItem from="1699760888331" duration="594000" />
+      <workItem from="1700615484729" duration="58000" />
+      <workItem from="1700615601684" duration="42000" />
+      <workItem from="1700937343862" duration="2884000" />
+      <workItem from="1700940659924" duration="5136000" />
+      <workItem from="1700977937659" duration="675000" />
+      <workItem from="1702324279115" duration="1198000" />
+      <workItem from="1702360843988" duration="795000" />
+      <workItem from="1702445332290" duration="8000" />
+      <workItem from="1713616198253" duration="59000" />
+      <workItem from="1713616367145" duration="1294000" />
     </task>
     <servers />
   </component>

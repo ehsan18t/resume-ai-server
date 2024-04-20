@@ -9,6 +9,11 @@
  - [API Tests (PostMan)](https://elements.getpostman.com/redirect?entityId=28446015-f0c7ad26-98e7-47f2-8120-82692c8865e5&entityType=collection)
  
 
+# Install
+```
+pip install tensorflow torch torchvision torchaudio flax
+```
+
 # Resources
  - [Youtube Tutorial](https://www.youtube.com/watch?v=2pZmxh8Tf78)
  - [Blog](https://docs.digitalocean.com/tutorials/app-deploy-django-app/)

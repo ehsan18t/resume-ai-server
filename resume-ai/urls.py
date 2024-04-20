@@ -9,10 +9,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('djoser.urls')),
     path('api/', include('users.urls')),
-    path('api/university/', include('university.urls')),
-    path('api/department/', include('department.urls')),
-    path('api/course/', include('course.urls')),
-    path('api/forum/', include('forum.urls')),
-    path('api/chat/', include('chat.urls')),
     path('api/cv/', include('cv.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
