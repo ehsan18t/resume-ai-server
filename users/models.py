@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, PermissionsMixin, BaseUserManager
 from enum import Enum
+from django.db import models
 
 
 class UserType(Enum):
@@ -84,3 +85,28 @@ class UserAccount(AbstractUser, PermissionsMixin):
 
     def __str__(self):
         return f'{self.first_name} {self.last_name} [{self.username}]'
+
+
+class UserProfile(models.Model):
+    uid = models.OneToOneField(UserAccount, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=500, blank=True)
+    location = models.CharField(max_length=30, blank=True)
+    birth_date = models.DateField(null=True, blank=True)
+    website = models.URLField(max_length=200, blank=True)
+    phone_numbers = models.JSONField(blank=True)
+    social_media = models.JSONField(blank=True)
+
+    experiences = models.JSONField(blank=True)
+    educations = models.JSONField(blank=True)
+    skills = models.JSONField(blank=True)
+    languages = models.JSONField(blank=True)
+    interests = models.JSONField(blank=True)
+    projects = models.JSONField(blank=True)
+    certifications = models.JSONField(blank=True)
+    publications = models.JSONField(blank=True)
+    references = models.JSONField(blank=True)
+    hobbies = models.JSONField(blank=True)
+    achievements = models.JSONField(blank=True)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
