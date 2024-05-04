@@ -87,6 +87,7 @@ class AchievementSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
+    user = UserAccountSerializer(read_only=True)
     experiences = ExperienceSerializer(many=True, read_only=True)
     educations = EducationSerializer(many=True, read_only=True)
     skills = SkillSerializer(many=True, read_only=True)
