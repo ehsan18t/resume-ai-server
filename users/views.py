@@ -9,7 +9,6 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView,
     TokenVerifyView
 )
-from os import getenv
 
 from users.models import UserAccount
 from users.permissions import AdminToStudent
