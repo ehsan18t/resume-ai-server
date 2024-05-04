@@ -90,11 +90,11 @@ class UserAccount(AbstractUser, PermissionsMixin):
 class UserProfile(models.Model):
     user = models.ForeignKey(UserAccount, related_name='profile', on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
-    location = models.CharField(max_length=30, blank=True)
+    location = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
     website = models.URLField(max_length=200, blank=True)
-    phone_numbers = models.JSONField(blank=True)
-    social_media = models.JSONField(blank=True)
+    phone_numbers = models.JSONField(blank=True, null=True)
+    social_media = models.JSONField(blank=True, null=True)
 
     experience = models.ForeignKey('Experience', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
     education = models.ForeignKey('Education', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
