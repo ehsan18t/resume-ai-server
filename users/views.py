@@ -136,7 +136,6 @@ def get_user_by_id(request):
 
 
 @api_view(['POST'])
-@permission_classes([AllowAny])
 def pdf_to_profile(request):
     if request.FILES.get('pdf_file') is None:
         return Response({'error': 'PDF file not provided.'}, status=status.HTTP_400_BAD_REQUEST)
@@ -156,29 +155,29 @@ def pdf_to_profile(request):
 
         # Set up the model
         generation_config = {
-          "temperature": 1,
-          "top_p": 0.95,
-          "top_k": 0,
-          "max_output_tokens": 8192,
-          "response_mime_type": "application/json",
+            "temperature": 1,
+            "top_p": 0.95,
+            "top_k": 0,
+            "max_output_tokens": 8192,
+            "response_mime_type": "application/json",
         }
 
         safety_settings = [
             {
                 "category": "HARM_CATEGORY_HARASSMENT",
-                "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                "threshold": "BLOCK_NONE"
             },
             {
                 "category": "HARM_CATEGORY_HATE_SPEECH",
-                "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                "threshold": "BLOCK_NONE"
             },
             {
                 "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
-                "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                "threshold": "BLOCK_NONE"
             },
             {
                 "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
-                "threshold": "BLOCK_MEDIUM_AND_ABOVE"
+                "threshold": "BLOCK_NONE"
             },
         ]
 
@@ -293,8 +292,23 @@ def pdf_to_profile(request):
         """)
 
         # Remove leading/trailing whitespace and replace newlines with commas
-        json_data = response.text.strip().replace("\n", ",")
+        json_data = response.text.strip()
 
-        return Response(json_data)
+        # save data to database
+        json_obj = None
+        try:
+            json_obj = json.loads(json_data)
+        except json.JSONDecodeError as e:
+            print(f"Error decoding JSON: {e}")
+
+        user = request.user
+        serializer = UserProfileSerializer(data=json_obj[0])
+        if serializer.is_valid():
+            profile = serializer.save()
+            profile_serializer = UserProfileSerializer(profile, many=False)
+            return Response(profile_serializer.data)
+        else:
+            print(serializer.errors)
     except Exception as e:
-        return Response({'error': 'Unable to extract text from PDF.'}, status=status.HTTP_400_BAD_REQUEST)
+        print(e)
+        return Response({'error': "Some Error Has Occurred!"}, status=status.HTTP_400_BAD_REQUEST)
