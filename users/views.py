@@ -136,7 +136,9 @@ def get_user_by_id(request):
 
 
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def pdf_to_profile(request):
+    global json_obj
     if request.FILES.get('pdf_file') is None:
         return Response({'error': 'PDF file not provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -191,7 +193,8 @@ def pdf_to_profile(request):
         response = convo.send_message(f"""
         {extracted_text}
         can you organize this cv in json format for the following models
-
+        
+        # Main model
         class UserProfile(models.Model):
             user = models.ForeignKey(UserAccount, related_name='profile', on_delete=models.CASCADE)
             bio = models.TextField(max_length=500, blank=True)
@@ -200,7 +203,8 @@ def pdf_to_profile(request):
             website = models.URLField(max_length=200, blank=True)
             phone_numbers = models.JSONField(blank=True)
             social_media = models.JSONField(blank=True)
-        
+            
+            # Models used in UserProfile
             experience = models.ForeignKey('Experience', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
             education = models.ForeignKey('Education', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
             skill = models.ForeignKey('Skill', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
@@ -295,20 +299,22 @@ def pdf_to_profile(request):
         json_data = response.text.strip()
 
         # save data to database
-        json_obj = None
         try:
             json_obj = json.loads(json_data)
-        except json.JSONDecodeError as e:
+            # print
+            print(json_obj[0])
+
+            serializer = UserProfileSerializer(data=json_obj[0])
+            if serializer.is_valid():
+                profile = serializer.save()
+                print('Profile created successfully!')
+                profile_serializer = UserProfileSerializer(profile, many=False)
+            else:
+                print(serializer.errors)
+        except Exception as e:
             print(f"Error decoding JSON: {e}")
 
-        user = request.user
-        serializer = UserProfileSerializer(data=json_obj[0])
-        if serializer.is_valid():
-            profile = serializer.save()
-            profile_serializer = UserProfileSerializer(profile, many=False)
-            return Response(profile_serializer.data)
-        else:
-            print(serializer.errors)
+        return Response({'json_data': json_obj[0]}, status=status.HTTP_200_OK)
     except Exception as e:
         print(e)
         return Response({'error': "Some Error Has Occurred!"}, status=status.HTTP_400_BAD_REQUEST)
