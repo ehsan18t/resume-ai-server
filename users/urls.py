@@ -1,13 +1,6 @@
 from django.urls import path, re_path
 
-from .views import (
-    CustomProviderAuthView,
-    CustomTokenObtainPairView,
-    CustomTokenRefreshView,
-    CustomTokenVerifyView,
-    LogoutView,
-    get_user_by_id
-)
+from .views import *
 
 urlpatterns = [
     re_path(
@@ -20,4 +13,5 @@ urlpatterns = [
     path('jwt/verify/', CustomTokenVerifyView.as_view()),
     path('logout/', LogoutView.as_view()),
     path('user/', get_user_by_id, name='get-user-by-id'),
+    path('pdftoprofile/', pdf_to_profile, name='pdf-to-profile'),
 ]
