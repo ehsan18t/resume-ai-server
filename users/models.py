@@ -85,31 +85,33 @@ class UserAccount(AbstractUser, PermissionsMixin):
         return f'{self.first_name} {self.last_name} [{self.username}]'
 
 
+# Main model
 class UserProfile(models.Model):
-    user = models.ForeignKey(UserAccount, related_name='profile', on_delete=models.CASCADE)
+    user = models.OneToOneField(UserAccount, related_name='profile', on_delete=models.CASCADE)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
-    website = models.URLField(max_length=200, blank=True)
+    website = models.CharField(max_length=200, blank=True, null=True)
     phone_numbers = models.JSONField(blank=True, null=True)
     social_media = models.JSONField(blank=True, null=True)
 
-    experience = models.ForeignKey('Experience', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
-    education = models.ForeignKey('Education', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
-    skill = models.ForeignKey('Skill', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
-    language = models.ForeignKey('Language', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
-    interest = models.ForeignKey('Interest', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
-    project = models.ForeignKey('Project', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
-    certification = models.ForeignKey('Certification', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
-    publication = models.ForeignKey('Publication', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
-    reference = models.ForeignKey('Reference', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
-    hobby = models.ForeignKey('Hobby', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
-    achievement = models.ForeignKey('Achievement', related_name='profile', on_delete=models.CASCADE, null=True, blank=True)
+    experiences = models.ManyToManyField('Experience', related_name='profiles', blank=True)
+    educations = models.ManyToManyField('Education', related_name='profiles', blank=True)
+    skills = models.ManyToManyField('Skill', related_name='profiles', blank=True)
+    languages = models.ManyToManyField('Language', related_name='profiles', blank=True)
+    interests = models.ManyToManyField('Interest', related_name='profiles', blank=True)
+    projects = models.ManyToManyField('Project', related_name='profiles', blank=True)
+    certifications = models.ManyToManyField('Certification', related_name='profiles', blank=True)
+    publications = models.ManyToManyField('Publication', related_name='profiles', blank=True)
+    references = models.ManyToManyField('Reference', related_name='profiles', blank=True)
+    hobbies = models.ManyToManyField('Hobby', related_name='profiles', blank=True)
+    achievements = models.ManyToManyField('Achievement', related_name='profiles', blank=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 
+# Models used in UserProfile
 class Experience(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
@@ -127,12 +129,12 @@ class Education(models.Model):
 
 class Skill(models.Model):
     name = models.CharField(max_length=100)
-    proficiency = models.CharField(max_length=50)
+    proficiency = models.CharField(max_length=50, blank=True, null=True)
 
 
 class Language(models.Model):
     language = models.CharField(max_length=100)
-    proficiency = models.CharField(max_length=50)
+    proficiency = models.CharField(max_length=50, blank=True, null=True)
 
 
 class Interest(models.Model):
@@ -141,26 +143,26 @@ class Interest(models.Model):
 
 class Project(models.Model):
     name = models.CharField(max_length=100)
-    description = models.TextField()
-    start_date = models.DateField()
+    description = models.TextField(null=True, blank=True)
+    start_date = models.DateField(null=True, blank=True)
     end_date = models.DateField(null=True, blank=True)
 
 
 class Certification(models.Model):
     name = models.CharField(max_length=100)
-    authority = models.CharField(max_length=100)
-    date = models.DateField()
+    authority = models.CharField(max_length=100, null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
 
 
 class Publication(models.Model):
     title = models.CharField(max_length=200)
-    description = models.TextField()
-    date = models.DateField()
+    description = models.TextField(null=True, blank=True)
+    date = models.DateField(null=True, blank=True)
 
 
 class Reference(models.Model):
     name = models.CharField(max_length=100)
-    email = models.EmailField()
+    email = models.EmailField(null=True, blank=True)
 
 
 class Hobby(models.Model):
@@ -169,4 +171,4 @@ class Hobby(models.Model):
 
 class Achievement(models.Model):
     name = models.CharField(max_length=100)
-    date = models.DateField()
+    date = models.DateField(null=True, blank=True)
