@@ -8,9 +8,8 @@ class UserType(Enum):
     SU = 0
     ADMIN = 1
     MOD = 2
-    FACULTY = 3
-    REPRESENTATIVE = 4
-    STUDENT = 5
+    REPRESENTATIVE = 3
+    USER = 4
 
 
 class UserAccountManager(BaseUserManager):
@@ -72,12 +71,11 @@ class UserAccount(AbstractUser, PermissionsMixin):
         (UserType.SU.value, 'Super Admin'),
         (UserType.ADMIN.value, 'Admin'),
         (UserType.MOD.value, 'Moderator'),
-        (UserType.FACULTY.value, 'Faculty'),
         (UserType.REPRESENTATIVE.value, 'Representative'),
-        (UserType.STUDENT.value, 'Student'),
+        (UserType.USER.value, 'User'),
     ]
 
-    user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=UserType.STUDENT.value)
+    user_type = models.IntegerField(choices=USER_TYPE_CHOICES, default=UserType.USER.value)
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'username']
 
