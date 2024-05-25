@@ -111,7 +111,6 @@ class UserProfile(models.Model):
 
 
 class Experience(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='experiences', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     description = models.TextField()
     start_date = models.DateField()
@@ -119,7 +118,6 @@ class Experience(models.Model):
 
 
 class Education(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='educations', on_delete=models.CASCADE)
     institution = models.CharField(max_length=100)
     degree = models.CharField(max_length=100)
     field_of_study = models.CharField(max_length=100)
@@ -128,24 +126,20 @@ class Education(models.Model):
 
 
 class Skill(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='skills', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     proficiency = models.CharField(max_length=50)
 
 
 class Language(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='languages', on_delete=models.CASCADE)
     language = models.CharField(max_length=100)
     proficiency = models.CharField(max_length=50)
 
 
 class Interest(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='interests', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
 
 
 class Project(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='projects', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     description = models.TextField()
     start_date = models.DateField()
@@ -153,31 +147,26 @@ class Project(models.Model):
 
 
 class Certification(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='certifications', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     authority = models.CharField(max_length=100)
     date = models.DateField()
 
 
 class Publication(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='publications', on_delete=models.CASCADE)
     title = models.CharField(max_length=200)
     description = models.TextField()
     date = models.DateField()
 
 
 class Reference(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='references', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     email = models.EmailField()
 
 
 class Hobby(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='hobbies', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
 
 
 class Achievement(models.Model):
-    user_profile = models.ForeignKey(UserProfile, related_name='achievements', on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     date = models.DateField()
