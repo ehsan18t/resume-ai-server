@@ -244,27 +244,31 @@ def get_response(extracted_text):
     class Certification(models.Model):
         name = models.CharField(max_length=100)
         authority = models.CharField(max_length=100)
-        date = models.DateField()
+        description = models.TextField(null=True, blank=True)
+        date = models.DateField(null=True, blank=True)
     
     
     class Publication(models.Model):
         title = models.CharField(max_length=200)
-        description = models.TextField()
-        date = models.DateField()
+        description = models.TextField(null=True, blank=True)
+        date = models.DateField(null=True, blank=True)
     
     
     class Reference(models.Model):
         name = models.CharField(max_length=100)
-        email = models.EmailField()
+        designation = models.CharField(max_length=100, null=True, blank=True)
+        email = models.EmailField(null=True, blank=True)
+        phone_number = models.CharField(max_length=20, null=True, blank=True)
     
     
     class Hobby(models.Model):
         name = models.CharField(max_length=100)
     
-    
+
     class Achievement(models.Model):
         name = models.CharField(max_length=100)
-        date = models.DateField()
+        description = models.TextField(null=True, blank=True)
+        date = models.DateField(null=True, blank=True)
 
     """)
 
@@ -285,10 +289,10 @@ def pdf_to_profile(request):
 
     pdf_file = request.FILES.get('pdf_file')
 
-    if True:
-        test_obj = UserProfile.objects.get(id=12)
-        serializer = UserProfileSerializer(test_obj, many=False)
-        return Response(serializer.data)
+    # if True:
+    #     test_obj = UserProfile.objects.get(id=12)
+    #     serializer = UserProfileSerializer(test_obj, many=False)
+    #     return Response(serializer.data)
     #     print('user: ', request.user.id)
     #     user = UserAccount.objects.get(id=request.user.id)
     #     serialized_user = UserAccountSerializer(user, many=False)
@@ -306,7 +310,7 @@ def pdf_to_profile(request):
 
         # save data to database
         try:
-            json_obj = json.loads(get_fake_response(extracted_text))
+            json_obj = json.loads(get_response(extracted_text))
             print('user: ', request.user.id)
             serialized_user = UserAccountSerializer(UserAccount.objects.get(id=request.user.id), many=False)
 

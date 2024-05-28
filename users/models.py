@@ -95,80 +95,17 @@ class UserProfile(models.Model):
     phone_numbers = models.JSONField(blank=True, null=True)
     social_media = models.JSONField(blank=True, null=True)
 
-    experiences = models.ManyToManyField('Experience', related_name='profiles', blank=True)
-    educations = models.ManyToManyField('Education', related_name='profiles', blank=True)
-    skills = models.ManyToManyField('Skill', related_name='profiles', blank=True)
-    languages = models.ManyToManyField('Language', related_name='profiles', blank=True)
-    interests = models.ManyToManyField('Interest', related_name='profiles', blank=True)
-    projects = models.ManyToManyField('Project', related_name='profiles', blank=True)
-    certifications = models.ManyToManyField('Certification', related_name='profiles', blank=True)
-    publications = models.ManyToManyField('Publication', related_name='profiles', blank=True)
-    references = models.ManyToManyField('Reference', related_name='profiles', blank=True)
-    hobbies = models.ManyToManyField('Hobby', related_name='profiles', blank=True)
-    achievements = models.ManyToManyField('Achievement', related_name='profiles', blank=True)
+    experiences = models.JSONField(blank=True, null=True)
+    educations = models.JSONField(blank=True, null=True)
+    skills = models.JSONField(blank=True, null=True)
+    languages = models.JSONField(blank=True, null=True)
+    interests = models.JSONField(blank=True, null=True)
+    projects = models.JSONField(blank=True, null=True)
+    certifications = models.JSONField(blank=True, null=True)
+    publications = models.JSONField(blank=True, null=True)
+    references = models.JSONField(blank=True, null=True)
+    hobbies = models.JSONField(blank=True, null=True)
+    achievements = models.JSONField(blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-
-# Models used in UserProfile
-class Experience(models.Model):
-    title = models.CharField(max_length=100)
-    description = models.TextField()
-    start_date = models.DateField()
-    end_date = models.DateField(null=True, blank=True)
-
-
-class Education(models.Model):
-    institution = models.CharField(max_length=100)
-    degree = models.CharField(max_length=100)
-    field_of_study = models.CharField(max_length=100)
-    start_date = models.DateField()
-    end_date = models.DateField(null=True, blank=True)
-
-
-class Skill(models.Model):
-    name = models.CharField(max_length=100)
-    proficiency = models.CharField(max_length=50, blank=True, null=True)
-
-
-class Language(models.Model):
-    language = models.CharField(max_length=100)
-    proficiency = models.CharField(max_length=50, blank=True, null=True)
-
-
-class Interest(models.Model):
-    name = models.CharField(max_length=100)
-
-
-class Project(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(null=True, blank=True)
-    start_date = models.DateField(null=True, blank=True)
-    end_date = models.DateField(null=True, blank=True)
-
-
-class Certification(models.Model):
-    name = models.CharField(max_length=100)
-    authority = models.CharField(max_length=100, null=True, blank=True)
-    date = models.DateField(null=True, blank=True)
-
-
-class Publication(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField(null=True, blank=True)
-    date = models.DateField(null=True, blank=True)
-
-
-class Reference(models.Model):
-    name = models.CharField(max_length=100)
-    email = models.EmailField(null=True, blank=True)
-
-
-class Hobby(models.Model):
-    name = models.CharField(max_length=100)
-
-
-class Achievement(models.Model):
-    name = models.CharField(max_length=100)
-    date = models.DateField(null=True, blank=True)
