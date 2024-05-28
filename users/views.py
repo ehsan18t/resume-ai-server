@@ -353,10 +353,14 @@ def pdf_to_profile(request):
 def get_profile_by_id(request):
     try:
         user_id = request.GET.get('user_id')
-        user = UserAccount.objects.get(id=user_id)
+        if user_id:
+            user = UserAccount.objects.get(id=user_id)
+        else:
+            u = request.GET.get('u')
+            user = UserAccount.objects.get(username=u)
         user_serializer = UserAccountSerializer(user, many=False)
         try:
-            profile = UserProfile.objects.get(user=user_id)
+            profile = UserProfile.objects.get(user=user)
             profile_serializer = UserProfileSerializer(profile, many=False)
             return Response({'user': user_serializer.data, 'profile': profile_serializer.data}, status=status.HTTP_200_OK)
         except Exception as e:
