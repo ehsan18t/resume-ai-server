@@ -14,4 +14,5 @@ urlpatterns = [
     path('logout/', LogoutView.as_view()),
     path('user/', get_user_by_id, name='get-user-by-id'),
     path('pdftoprofile/', pdf_to_profile, name='pdf-to-profile'),
+    path('profile/', get_profile_by_id, name='get-profile'),
 ]

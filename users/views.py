@@ -282,7 +282,6 @@ def get_response(extracted_text):
     convo = model.start_chat(history=[
     ])
 
-
     return response.text.strip()
 
 
@@ -347,3 +346,20 @@ def pdf_to_profile(request):
     except Exception as e:
         print(e)
         return Response({'error': "Some Error Has Occurred!"}, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_profile_by_id(request):
+    try:
+        user_id = request.GET.get('user_id')
+        user = UserAccount.objects.get(id=user_id)
+        user_serializer = UserAccountSerializer(user, many=False)
+        try:
+            profile = UserProfile.objects.get(user=user_id)
+            profile_serializer = UserProfileSerializer(profile, many=False)
+            return Response({'user': user_serializer.data, 'profile': profile_serializer.data}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({'user': user_serializer.data, 'profile': {}}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': 'Profile not found!'}, status=status.HTTP_404_NOT_FOUND)
