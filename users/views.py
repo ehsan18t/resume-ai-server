@@ -215,6 +215,7 @@ def get_response(extracted_text):
     class Education(models.Model):
         institution = models.CharField(max_length=100)
         degree = models.CharField(max_length=100)
+        cgpa = models.FloatField(null=True, blank=True)
         field_of_study = models.CharField(max_length=100)
         start_date = models.DateField()
         end_date = models.DateField(null=True, blank=True)
