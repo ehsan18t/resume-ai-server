@@ -181,6 +181,7 @@ def get_response(extracted_text):
     # Main model
     class UserProfile(models.Model):
         user = models.ForeignKey(UserAccount, related_name='profile', on_delete=models.CASCADE)
+        # generate bio if not exist
         bio = models.TextField(max_length=500, blank=True)
         location = models.CharField(max_length=100, blank=True)
         birth_date = models.DateField(null=True, blank=True)
@@ -234,10 +235,11 @@ def get_response(extracted_text):
     class Interest(models.Model):
         name = models.CharField(max_length=100)
     
-    
+
     class Project(models.Model):
         name = models.CharField(max_length=100)
         description = models.TextField()
+        tags = models.JSONField(null=True, blank=True)
         start_date = models.DateField()
         end_date = models.DateField(null=True, blank=True)
     
