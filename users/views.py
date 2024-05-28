@@ -181,6 +181,7 @@ def get_response(extracted_text):
     # Main model
     class UserProfile(models.Model):
         user = models.ForeignKey(UserAccount, related_name='profile', on_delete=models.CASCADE)
+        title = models.CharField(max_length=100, blank=True)
         # generate bio if not exist
         bio = models.TextField(max_length=500, blank=True)
         location = models.CharField(max_length=100, blank=True)
@@ -274,6 +275,13 @@ def get_response(extracted_text):
         date = models.DateField(null=True, blank=True)
 
     """)
+    model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
+                                  generation_config=generation_config,
+                                  safety_settings=safety_settings)
+
+    convo = model.start_chat(history=[
+    ])
+
 
     return response.text.strip()
 

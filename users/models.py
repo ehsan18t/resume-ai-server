@@ -88,6 +88,7 @@ class UserAccount(AbstractUser, PermissionsMixin):
 # Main model
 class UserProfile(models.Model):
     user = models.OneToOneField(UserAccount, related_name='profile', on_delete=models.CASCADE)
+    title = models.CharField(max_length=100, blank=True)
     bio = models.TextField(max_length=500, blank=True)
     location = models.CharField(max_length=100, blank=True)
     birth_date = models.DateField(null=True, blank=True)
