@@ -4,6 +4,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
+from cv.models import AppliedCandidates
 from .models import *
 from .serializers import *
 
@@ -91,8 +92,15 @@ def get_category_posts(request):
 def get_feed_posts(request):
     try:
         posts = Post.objects.all()
+
         # sort based on time (newest first)
         posts = posts.order_by('-created_at')
+
+        # Update is_applied field
+        for index in range(len(posts)):
+            post = posts[index]
+            posts[index].is_applied = AppliedCandidates.objects.filter(post=post, user=request.user).exists()
+
         serialized = PostSerializer(posts, many=True)
 
         return Response({'posts': serialized.data}, status=status.HTTP_200_OK)

@@ -20,6 +20,7 @@ class Post(models.Model):
     content = models.TextField()
     is_job_circular = models.BooleanField(default=False)
     category = models.ForeignKey(Category, on_delete=models.CASCADE, null=True, blank=True)
+    is_applied = models.BooleanField(default=False, blank=True, null=True)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

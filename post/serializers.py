@@ -4,6 +4,7 @@ from django.utils import timezone
 from rest_framework import serializers
 
 import users.serializers
+from cv.models import AppliedCandidates
 from .models import *
 
 
@@ -19,7 +20,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ['id', 'content', 'is_job_circular', 'created_at', 'updated_at', 'category', 'formatted_time', 'user']
+        fields = '__all__'
 
     def get_formatted_time(self, obj):
         now = timezone.now()
