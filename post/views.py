@@ -79,6 +79,8 @@ def get_category_posts(request):
         slung = request.GET.get('slung')
         category = Category.objects.get(slung=slung)
         posts = Post.objects.filter(category=category)
+        # sort based on time (newest first)
+        posts = posts.order_by('-created_at')
         serialized = PostSerializer(posts, many=True)
 
         return Response({'posts': serialized.data}, status=status.HTTP_200_OK)
