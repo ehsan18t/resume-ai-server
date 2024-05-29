@@ -6,7 +6,7 @@ from .models import *
 
 class AppliedCandidatesSerializer(serializers.ModelSerializer):
     user = UserAccountSerializerMin()
-    profile = UserProfileSerializer()
+    # profile = UserProfileSerializer()
 
     class Meta:
         model = AppliedCandidates
