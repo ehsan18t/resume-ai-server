@@ -23,7 +23,7 @@ class UserAccountSerializer(serializers.ModelSerializer):
 class UserAccountSerializerMin(serializers.ModelSerializer):
     class Meta:
         model = UserAccount
-        fields = ['first_name', 'last_name', 'username']
+        fields = ['id', 'first_name', 'last_name', 'username']
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
