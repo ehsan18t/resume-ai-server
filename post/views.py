@@ -14,10 +14,9 @@ def create_post(request):
     try:
         user = request.user
         content = request.data.get('content')
-        print(content)
         is_job_circular = True if request.data.get('is_job_circular') == 1 else False
-        print(is_job_circular)
-        category = Category.objects.get(slung=request.data.get('category'))
+        slung = request.data.get('category')
+        category = Category.objects.get(slung=slung) if slung else None
 
         post = Post.objects.create(user=user, content=content, is_job_circular=is_job_circular, category=category)
         post.save()
@@ -85,3 +84,18 @@ def get_category_posts(request):
 
     except Exception as e:
         return Response({'msg': 'Failed to find posts!'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_feed_posts(request):
+    try:
+        posts = Post.objects.all()
+        # sort based on time (newest first)
+        posts = posts.order_by('-created_at')
+        serialized = PostSerializer(posts, many=True)
+
+        return Response({'posts': serialized.data}, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response({'msg': 'Failed to fetch posts!'}, status=status.HTTP_404_NOT_FOUND)

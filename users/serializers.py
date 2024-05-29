@@ -20,6 +20,12 @@ class UserAccountSerializer(serializers.ModelSerializer):
         fields = ['id', 'first_name', 'last_name', 'username', 'email', 'profile_picture', 'user_type']
 
 
+class UserAccountSerializerMin(serializers.ModelSerializer):
+    class Meta:
+        model = UserAccount
+        fields = ['first_name', 'last_name', 'username']
+
+
 class UserProfileSerializer(serializers.ModelSerializer):
     user = serializers.PrimaryKeyRelatedField(queryset=UserAccount.objects.all())
 
