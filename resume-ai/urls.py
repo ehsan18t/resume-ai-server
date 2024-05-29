@@ -10,4 +10,5 @@ urlpatterns = [
     path('api/', include('djoser.urls')),
     path('api/', include('users.urls')),
     path('api/cv/', include('cv.urls')),
+    path('api/post/', include('post.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

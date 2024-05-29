@@ -6,7 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="ef6faf05-e5bd-4fdc-af2c-96730b8206db" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/post/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/post/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resume-ai/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/urls.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -300,7 +303,7 @@
       <workItem from="1716602913684" duration="41000" />
       <workItem from="1716602967109" duration="14662000" />
       <workItem from="1716876087011" duration="13050000" />
-      <workItem from="1716939749392" duration="2042000" />
+      <workItem from="1716939749392" duration="4919000" />
     </task>
     <servers />
   </component>
@@ -317,5 +320,15 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/post/urls.py</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
