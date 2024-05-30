@@ -188,25 +188,32 @@ def get_response(extracted_text):
         birth_date = models.DateField(null=True, blank=True)
         website = models.URLField(max_length=200, blank=True)
         phone_numbers = models.JSONField(blank=True, null=True)
-        social_media = models.JSONField(blank=True, null=True)
-        
-        experiences = models.ManyToManyField('Experience', related_name='profiles', blank=True)
-        educations = models.ManyToManyField('Education', related_name='profiles', blank=True)
-        skills = models.ManyToManyField('Skill', related_name='profiles', blank=True)
-        languages = models.ManyToManyField('Language', related_name='profiles', blank=True)
-        interests = models.ManyToManyField('Interest', related_name='profiles', blank=True)
-        projects = models.ManyToManyField('Project', related_name='profiles', blank=True)
-        certifications = models.ManyToManyField('Certification', related_name='profiles', blank=True)
-        publications = models.ManyToManyField('Publication', related_name='profiles', blank=True)
-        references = models.ManyToManyField('Reference', related_name='profiles', blank=True)
-        hobbies = models.ManyToManyField('Hobby', related_name='profiles', blank=True)
-        achievements = models.ManyToManyField('Achievement', related_name='profiles', blank=True)
+        social_media = models.OneToOneField('SocialMedia', blank=True)
+
+        experiences = models.ManyToManyField('Experience', blank=True)
+        educations = models.ManyToManyField('Education', blank=True)
+        skills = models.ManyToManyField('Skill', blank=True)
+        languages = models.ManyToManyField('Language', blank=True)
+        interests = models.ManyToManyField('Interest', blank=True)
+        projects = models.ManyToManyField('Project', blank=True)
+        certifications = models.ManyToManyField('Certification', blank=True)
+        publications = models.ManyToManyField('Publication', blank=True)
+        references = models.ManyToManyField('Reference', blank=True)
+        hobbies = models.ManyToManyField('Hobby', blank=True)
+        achievements = models.ManyToManyField('Achievement', blank=True)
 
         created_at = models.DateTimeField(auto_now_add=True)
         updated_at = models.DateTimeField(auto_now=True)
     
     
     # Models used in UserProfile
+    class SocialMedia(models.Model):
+        github = models.CharField(max_length=100, related_name='github username')
+        linkedin = models.CharField(max_length=100, related_name='linkedin username')
+        twitter = models.CharField(max_length=100, related_name='twitter username')
+        facebook = models.CharField(max_length=100, related_name='facebook username')
+        email = models.CharField(max_length=100, related_name='email address')
+
     class Experience(models.Model):
         title = models.CharField(max_length=100)
         description = models.TextField()
