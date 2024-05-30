@@ -181,14 +181,14 @@ def get_response(extracted_text):
     # Main model
     class UserProfile(models.Model):
         user = models.ForeignKey(UserAccount, related_name='profile', on_delete=models.CASCADE)
-        title = models.CharField(max_length=100, blank=True)
+        title = models.CharField(max_length=100, blank=True, null=True)
         # generate bio if not exist
-        bio = models.TextField(max_length=500, blank=True)
-        location = models.CharField(max_length=100, blank=True)
-        birth_date = models.DateField(null=True, blank=True)
-        website = models.URLField(max_length=200, blank=True)
-        phone_numbers = models.JSONField(blank=True, null=True)
-        social_media = models.OneToOneField('SocialMedia', blank=True)
+        bio = models.TextField(max_length=500, blank=True, null=True)
+        location = models.CharField(max_length=100, blank=True, null=True)
+        birth_date = models.DateField(null=True, blank=True, null=True)
+        website = models.URLField(max_length=200, blank=True, null=True)
+        phone_numbers = models.JSONField(blank=True)
+        social_media = models.OneToOneField('SocialMedia', blank=True, null=True)
 
         experiences = models.ManyToManyField('Experience', blank=True)
         educations = models.ManyToManyField('Education', blank=True)
