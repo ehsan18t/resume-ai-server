@@ -308,6 +308,8 @@ def pdf_to_profile(request):
     #     serialized_user = UserAccountSerializer(user, many=False)
     #     return Response({'data': serialized_user.data}, status=status.HTTP_200_OK)
     #
+    if request.user.id is None:
+        return Response({'error': 'Anonymous request not allowed!'}, status=status.HTTP_400_BAD_REQUEST)
 
     try:
         pdf_reader = PdfReader(pdf_file)
