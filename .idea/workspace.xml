@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ef6faf05-e5bd-4fdc-af2c-96730b8206db" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resume-ai/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/resume-ai/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/users/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/users/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -303,7 +304,7 @@
       <workItem from="1716939749392" duration="16947000" />
       <workItem from="1716980021326" duration="1994000" />
       <workItem from="1716983094177" duration="1191000" />
-      <workItem from="1717075954054" duration="632000" />
+      <workItem from="1717075954054" duration="1408000" />
     </task>
     <servers />
   </component>
