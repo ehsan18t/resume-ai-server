@@ -311,8 +311,6 @@ def pdf_to_profile(request):
     profile = UserProfile.objects.get(user=request.user)
     if profile:
         print('Profile found for the user!')
-        print('Deleted the existing profile & generating a new profile.')
-        profile.delete()
 
     try:
         pdf_reader = PdfReader(pdf_file)
@@ -337,7 +335,14 @@ def pdf_to_profile(request):
 
             print('serializer created')
             if serializer.is_valid():
-                profile = serializer.save()
+                if profile:
+                    # populate date from new serializer to old profile object
+                    for key, value in serializer.validated_data.items():
+                        setattr(profile, key, value)
+                    profile.save()
+                else:
+                    profile = serializer.save()
+
                 print('Profile created successfully!')
                 profile_serializer = UserProfileSerializer(profile, many=False)
                 return Response({'profile': profile_serializer.data}, status=status.HTTP_200_OK)
