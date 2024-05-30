@@ -300,6 +300,13 @@ def pdf_to_profile(request):
     if request.user.id is None:
         return Response({'error': 'Anonymous request not allowed!'}, status=status.HTTP_400_BAD_REQUEST)
 
+    # Check if user already have a profile
+    profile = UserProfile.objects.get(user=request.user)
+    if profile:
+        print('Profile found for the user!')
+        print('Deleted the existing profile & generating a new profile.')
+        profile.delete()
+
     try:
         pdf_reader = PdfReader(pdf_file)
         num_pages = len(pdf_reader.pages)
