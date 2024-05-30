@@ -181,7 +181,7 @@ def get_response(extracted_text):
     # Main model
     class UserProfile(models.Model):
         user = models.ForeignKey(UserAccount, related_name='profile', on_delete=models.CASCADE)
-        title = models.CharField(max_length=100, blank=True, null=True)
+        title = models.CharField(max_length=100, blank=True, null=True, related_name='profession/job title')
         # generate bio if not exist
         bio = models.TextField(max_length=500, blank=True, null=True)
         location = models.CharField(max_length=100, blank=True, null=True)
