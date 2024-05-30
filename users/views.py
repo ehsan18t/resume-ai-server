@@ -292,22 +292,11 @@ def get_fake_response(extracted_text):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def pdf_to_profile(request):
-    json_obj = None
-
     if request.FILES.get('pdf_file') is None:
         return Response({'error': 'PDF file not provided.'}, status=status.HTTP_400_BAD_REQUEST)
 
     pdf_file = request.FILES.get('pdf_file')
 
-    # if True:
-    #     test_obj = UserProfile.objects.get(id=12)
-    #     serializer = UserProfileSerializer(test_obj, many=False)
-    #     return Response(serializer.data)
-    #     print('user: ', request.user.id)
-    #     user = UserAccount.objects.get(id=request.user.id)
-    #     serialized_user = UserAccountSerializer(user, many=False)
-    #     return Response({'data': serialized_user.data}, status=status.HTTP_200_OK)
-    #
     if request.user.id is None:
         return Response({'error': 'Anonymous request not allowed!'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -323,8 +312,6 @@ def pdf_to_profile(request):
         # save data to database
         try:
             json_obj = json.loads(get_response(extracted_text))
-            print('user: ', request.user.id)
-            serialized_user = UserAccountSerializer(UserAccount.objects.get(id=request.user.id), many=False)
 
             # Add the user information to the json_obj
             json_obj['user'] = request.user.id
