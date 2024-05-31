@@ -119,12 +119,10 @@ def request_summary(text):
         "educations": string | null,
         "skills": string | null,
         "languages": string | null,
-        "interests": string | null,
         "projects": string | null,
         "certifications": string | null,
         "publications": string | null,
         "references": string | null,
-        "hobbies": string | null,
         "achievements": string | null
 
         if no info available for a section, return null
