@@ -1,6 +1,8 @@
 from djoser.serializers import UserCreateSerializer
 from rest_framework import serializers
+from datetime import timedelta
 
+from django.utils import timezone
 from .models import *
 
 
@@ -59,3 +61,6 @@ class NotificationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
         fields = '__all__'
+
+    def get_formatted_time(self, obj):
+        return gen_formatted_time(obj)

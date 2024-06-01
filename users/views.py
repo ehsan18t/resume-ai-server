@@ -395,11 +395,11 @@ def get_unread_notifications_count(request):
 def get_notification_list(request):
     user = request.user
 
-    if user is None:
+    if user.id is None:
         return Response({'error': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
 
     try:
-        notifications = Notification.objects.filter(user=user, is_read=False)
+        notifications = Notification.objects.filter(user=user).order_by('-created_at')
         serializer = NotificationSerializer(notifications, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     except Exception as e:

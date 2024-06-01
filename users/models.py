@@ -117,7 +117,7 @@ class UserProfile(models.Model):
 
 
 class Notification(models.Model):
-    user = models.ForeignKey(UserAccount, related_name='notifications', on_delete=models.CASCADE)
+    user = models.ForeignKey(UserAccount, related_name='user', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     message = models.TextField(max_length=500)
     is_read = models.BooleanField(default=False)
