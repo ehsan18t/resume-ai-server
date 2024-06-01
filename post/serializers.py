@@ -14,6 +14,23 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+def gen_formatted_time(obj):
+    now = timezone.now()
+    time_diff = now - obj.created_at
+
+    if time_diff < timedelta(minutes=59):
+        mins = time_diff.seconds // 60
+        return f"{mins}m ago" if mins > 0 else "Just now"
+    elif time_diff < timedelta(hours=24):
+        hours = time_diff.seconds // 3600
+        return f"{hours}h ago" if hours > 0 else "Just now"
+    elif time_diff < timedelta(days=3):
+        days = time_diff.days
+        return f"{days}d ago"
+    else:
+        return obj.created_at.strftime('%b %d, %Y')
+
+
 class PostSerializer(serializers.ModelSerializer):
     user = users.serializers.UserAccountSerializerMin()
     formatted_time = serializers.SerializerMethodField()
@@ -23,17 +40,4 @@ class PostSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
     def get_formatted_time(self, obj):
-        now = timezone.now()
-        time_diff = now - obj.created_at
-
-        if time_diff < timedelta(minutes=59):
-            mins = time_diff.seconds // 60
-            return f"{mins}m ago" if mins > 0 else "Just now"
-        elif time_diff < timedelta(hours=24):
-            hours = time_diff.seconds // 3600
-            return f"{hours}h ago" if hours > 0 else "Just now"
-        elif time_diff < timedelta(days=3):
-            days = time_diff.days
-            return f"{days}d ago"
-        else:
-            return obj.created_at.strftime('%b %d, %Y')
+        return gen_formatted_time(obj)
