@@ -34,6 +34,7 @@ def gen_formatted_time(obj):
 class PostSerializer(serializers.ModelSerializer):
     user = users.serializers.UserAccountSerializerMin()
     formatted_time = serializers.SerializerMethodField()
+    category = CategorySerializer()
 
     class Meta:
         model = Post

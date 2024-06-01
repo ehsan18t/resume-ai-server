@@ -74,6 +74,24 @@ def get_category_list(request):
 
 @api_view(['GET'])
 @permission_classes([AllowAny])
+def get_category(request):
+    slung = request.GET.get('slung')
+
+    if not slung:
+        return Response({'msg': 'Category not found!'}, status=status.HTTP_404_NOT_FOUND)
+
+    try:
+        category = Category.objects.get(slung=slung)
+        serialized = CategorySerializer(category)
+
+        return Response({'category': serialized.data}, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response({'msg': 'Unexpected Error!'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
 def get_category_posts(request):
     try:
         slung = request.GET.get('slung')
