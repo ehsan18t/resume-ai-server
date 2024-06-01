@@ -400,6 +400,17 @@ def get_notification_list(request):
 
     try:
         notifications = Notification.objects.filter(user=user).order_by('-created_at')
+
+        for notification in notifications:
+            if not notification.is_seen:
+                notification.is_seen = True
+                notification.save()
+            elif notification.is_seen and not notification.is_read:
+                notification.is_read = True
+                notification.save()
+            else:
+                break
+
         serializer = NotificationSerializer(notifications, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
     except Exception as e:

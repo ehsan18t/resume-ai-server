@@ -120,6 +120,9 @@ class Notification(models.Model):
     user = models.ForeignKey(UserAccount, related_name='user', on_delete=models.CASCADE)
     title = models.CharField(max_length=100)
     message = models.TextField(max_length=500)
+
+    is_seen = models.BooleanField(default=False)
     is_read = models.BooleanField(default=False)
+
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
