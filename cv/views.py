@@ -1,14 +1,5 @@
-from django.shortcuts import render
-from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
-
-from users.models import UserAccount
-from .models import *
 from post.models import Post
 from .serializers import *
-from datetime import datetime, timezone
 import json
 
 from rest_framework import status
@@ -50,6 +41,8 @@ def change_cv_status(request):
         cv = AppliedCandidates.objects.get(post=post, user=user)
         cv.status = s
         cv.save()
+
+        Notification.objects.create(user=user, title=f"Your CV status has been updated to {s}")
 
         return Response({'msg': 'CV Status Changed Successfully!'}, status=status.HTTP_201_CREATED)
 
