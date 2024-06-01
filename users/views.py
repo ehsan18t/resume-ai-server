@@ -371,8 +371,36 @@ def get_profile_by_id(request):
         try:
             profile = UserProfile.objects.get(user=user)
             profile_serializer = UserProfileSerializer(profile, many=False)
-            return Response({'user': user_serializer.data, 'profile': profile_serializer.data}, status=status.HTTP_200_OK)
+            return Response({'user': user_serializer.data, 'profile': profile_serializer.data},
+                            status=status.HTTP_200_OK)
         except Exception as e:
             return Response({'user': user_serializer.data, 'profile': {}}, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': 'Profile not found!'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_unread_notifications_count(request):
+    try:
+        user = request.user
+        notifications = Notification.objects.filter(user=user, is_read=False)
+        return Response({'count': notifications.count()}, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_notification_list(request):
+    user = request.user
+
+    if user is None:
+        return Response({'error': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
+
+    try:
+        notifications = Notification.objects.filter(user=user, is_read=False)
+        serializer = NotificationSerializer(notifications, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    except Exception as e:
+        return Response({'error': 'Unexpected Error!'}, status=status.HTTP_404_NOT_FOUND)

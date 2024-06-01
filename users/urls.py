@@ -15,4 +15,6 @@ urlpatterns = [
     path('user/', get_user_by_id, name='get-user-by-id'),
     path('pdftoprofile/', pdf_to_profile, name='pdf-to-profile'),
     path('profile/', get_profile_by_id, name='get-profile'),
+    path('notifications/', get_notification_list, name='get_notification_list'),
+    path('notifications/unread/', get_unread_notifications_count, name='get_unread_notifications_count'),
 ]

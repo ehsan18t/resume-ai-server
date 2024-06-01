@@ -114,3 +114,12 @@ class UserProfile(models.Model):
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+
+class Notification(models.Model):
+    user = models.ForeignKey(UserAccount, related_name='notifications', on_delete=models.CASCADE)
+    title = models.CharField(max_length=100)
+    message = models.TextField(max_length=500)
+    is_read = models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
