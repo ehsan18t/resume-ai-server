@@ -17,4 +17,5 @@ urlpatterns = [
     path('profile/', get_profile_by_id, name='get-profile'),
     path('notifications/', get_notification_list, name='get_notification_list'),
     path('notifications/unread/', get_unread_notifications_count, name='get_unread_notifications_count'),
+    path('notifications/clear/', clear_notifications, name='clear_notifications'),
 ]

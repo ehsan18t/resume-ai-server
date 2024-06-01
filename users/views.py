@@ -415,3 +415,22 @@ def get_notification_list(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': 'Unexpected Error!'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def clear_notifications(request):
+    user = request.user
+
+    if user.id is None:
+        return Response({'error': 'User not found!'}, status=status.HTTP_404_NOT_FOUND)
+
+    try:
+        notifications = Notification.objects.filter(user=user)
+        for notification in notifications:
+            notification.delete()
+
+        return Response({'message': 'All notifications cleared!'}, status=status.HTTP_200_OK)
+    except Exception as e:
+        print(e)
+        return Response({'error': 'Unexpected Error!'}, status=status.HTTP_404_NOT_FOUND)
