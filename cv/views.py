@@ -151,6 +151,7 @@ def change_cv_status(request):
                 feedback = Feedback.objects.get(cv=cv)
                 feedback.final = generate_final_feedback(cv)
                 feedback.save()
+                Notification.objects.create(user=cv.user, title=f"A detailed feedback has been generated for your job application!")
 
         Notification.objects.create(user=user, title=f"Your CV status has been updated to {s}")
 
