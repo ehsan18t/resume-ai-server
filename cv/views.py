@@ -16,12 +16,19 @@ import google.generativeai as genai
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def apply_job(request):
+    if not request.user.is_authenticated:
+        return Response({'msg': 'User not authenticated!'}, status=status.HTTP_400_BAD_REQUEST)
+
+    if request.data.get('post') is None:
+        return Response({'msg': 'Post ID is required!'}, status=status.HTTP_400_BAD_REQUEST)
+
     try:
         post = Post.objects.get(id=request.data.get('post'))
         user = request.user
-        cv = request.data.get('cv')
+        profile = UserProfile.objects.get(user=user)
+        # cv = request.data.get('cv')
 
-        applied = AppliedCandidates.objects.create(post=post, user=user, cv=cv)
+        applied = AppliedCandidates.objects.create(post=post, user=user, profile=profile)
         applied.save()
 
         return Response({'msg': 'Applied successfully!'}, status=status.HTTP_201_CREATED)
