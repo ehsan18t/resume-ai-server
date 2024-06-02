@@ -158,3 +158,27 @@ def get_cv_summary(request):
         return Response({"profile": profile_serializer.data, "summary": summary}, status=status.HTTP_200_OK)
     except Exception as e:
         return Response({'error': 'Profile not found!'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_applied_jobs(request):
+    if not request.user.is_authenticated:
+        return Response({'msg': 'User not authenticated!'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user = request.user
+        applied = AppliedCandidates.objects.filter(user=user)
+        posts = Post.objects.filter(id__in=[a.post.id for a in applied])
+
+        # Update is_applied field
+        for index in range(len(posts)):
+            post = posts[index]
+            posts[index].is_applied = AppliedCandidates.objects.filter(post=post, user=request.user).exists()
+
+        serialized = PostSerializer(posts, many=True)
+
+        return Response({'posts': serialized.data}, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response({'msg': 'Failed to fetch categories!'}, status=status.HTTP_404_NOT_FOUND)
