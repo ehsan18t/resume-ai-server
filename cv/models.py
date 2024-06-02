@@ -16,3 +16,12 @@ class AppliedCandidates(models.Model):
 
     def __str__(self):
         return f"{self.user} applied for {self.post}"
+
+
+class Feedback(models.Model):
+    cv = models.ForeignKey(AppliedCandidates, on_delete=models.CASCADE)
+    initial = models.TextField()
+    final = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Feedback for {self.cv}"

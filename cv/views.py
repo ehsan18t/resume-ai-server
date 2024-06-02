@@ -7,8 +7,8 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 
-
 from users.serializers import *
+from .models import *
 
 import google.generativeai as genai
 
@@ -46,6 +46,11 @@ def change_cv_status(request):
     if request.data.get('user') is None:
         return Response({'msg': 'User ID is required!'}, status=status.HTTP_400_BAD_REQUEST)
 
+    rejected_from = request.data.get('rejected_from')
+
+    if rejected_from is None:
+        return Response({'msg': 'Rejected from is required!'}, status=status.HTTP_400_BAD_REQUEST)
+
     try:
         post = Post.objects.get(id=request.data.get('post'))
         user = UserAccount.objects.get(id=request.data.get('user'))
@@ -54,6 +59,15 @@ def change_cv_status(request):
         cv = AppliedCandidates.objects.get(post=post, user=user)
         cv.status = s
         cv.save()
+
+        # check if feedback object is exists
+        feedback = Feedback.objects.filter(cv=cv).first()
+
+        if feedback is not None:
+            feedback.initial = rejected_from
+            feedback.save()
+        else:
+            Feedback.objects.create(cv=cv, initial=rejected_from)
 
         Notification.objects.create(user=user, title=f"Your CV status has been updated to {s}")
 

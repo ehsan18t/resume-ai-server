@@ -12,3 +12,11 @@ class AppliedCandidatesSerializer(serializers.ModelSerializer):
     class Meta:
         model = AppliedCandidates
         fields = '__all__'
+
+
+class FeedbackSerializer(serializers.ModelSerializer):
+    cv = AppliedCandidatesSerializer()
+
+    class Meta:
+        model = Feedback
+        fields = '__all__'
