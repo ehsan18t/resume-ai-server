@@ -40,6 +40,12 @@ def apply_job(request):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def change_cv_status(request):
+    if request.data.get('post') is None:
+        return Response({'msg': 'Post ID is required!'}, status=status.HTTP_400_BAD_REQUEST)
+
+    if request.data.get('user') is None:
+        return Response({'msg': 'User ID is required!'}, status=status.HTTP_400_BAD_REQUEST)
+
     try:
         post = Post.objects.get(id=request.data.get('post'))
         user = UserAccount.objects.get(id=request.data.get('user'))
