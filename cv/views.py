@@ -286,3 +286,23 @@ def get_applied_jobs(request):
 
     except Exception as e:
         return Response({'msg': 'Failed to fetch categories!'}, status=status.HTTP_404_NOT_FOUND)
+
+
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def get_applied_jobs_feedback(request):
+    if not request.user.is_authenticated:
+        return Response({'msg': 'User not authenticated!'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        user = request.user
+        applied = AppliedCandidates.objects.filter(user=user)
+
+        feedback = Feedback.objects.filter(cv__in=applied)
+
+        serialized = FeedbackSerializer(feedback, many=True)
+
+        return Response({'feedback': serialized.data}, status=status.HTTP_200_OK)
+
+    except Exception as e:
+        return Response({'msg': 'Failed to fetch categories!'}, status=status.HTTP_404_NOT_FOUND)
