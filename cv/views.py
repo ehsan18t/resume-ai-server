@@ -37,6 +37,81 @@ def apply_job(request):
         return Response({'msg': 'Failed to apply!'}, status=status.HTTP_400_BAD_REQUEST)
 
 
+def prepare(post, cv):
+    genai.configure(api_key="AIzaSyDx12uRNsU7-9_KJoC4vknansZxLzWcnkw")
+
+    # Set up the model
+    generation_config = {
+        "temperature": 1,
+        "top_p": 0.95,
+        "top_k": 0,
+        "max_output_tokens": 8192,
+        "response_mime_type": "application/json",
+    }
+
+    safety_settings = [
+        {
+            "category": "HARM_CATEGORY_HARASSMENT",
+            "threshold": "BLOCK_NONE"
+        },
+        {
+            "category": "HARM_CATEGORY_HATE_SPEECH",
+            "threshold": "BLOCK_NONE"
+        },
+        {
+            "category": "HARM_CATEGORY_SEXUALLY_EXPLICIT",
+            "threshold": "BLOCK_NONE"
+        },
+        {
+            "category": "HARM_CATEGORY_DANGEROUS_CONTENT",
+            "threshold": "BLOCK_NONE"
+        },
+    ]
+
+    model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
+                                  generation_config=generation_config,
+                                  safety_settings=safety_settings)
+
+    convo = model.start_chat(history=[
+    ])
+
+    response = convo.send_message(f"""
+    here is the cv of the candidate:
+    {cv}
+    
+    here is the job post:
+    {post}
+
+    can you find out possible reasons for rejection and provide detailed improvement feedback in the following format and return valid json object so that it can actully help the canditate? 
+
+    "report":
+        "reason": string | null,
+        "improvement_suggestion": string | null,
+
+        if no info available for a section, return null
+    """)
+    model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
+                                  generation_config=generation_config,
+                                  safety_settings=safety_settings)
+
+    convo = model.start_chat(history=[
+    ])
+
+    return response.text.strip()
+
+
+def generate_final_feedback(cv):
+    post = cv.post
+    serialized_post = PostSerializer(post, many=False)
+    post_json = json.dumps(serialized_post.data)
+
+    profile = cv.profile
+    serialized_profile = UserProfileSerializer(profile, many=False)
+    profile_json = json.dumps(serialized_profile.data)
+
+    return prepare(post_json, profile_json)
+
+
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def change_cv_status(request):
@@ -60,7 +135,7 @@ def change_cv_status(request):
         cv.status = s
         cv.save()
 
-        # check if feedback object is exists
+        # check if feedback object exists
         feedback = Feedback.objects.filter(cv=cv).first()
 
         if feedback is not None:
@@ -68,6 +143,14 @@ def change_cv_status(request):
             feedback.save()
         else:
             Feedback.objects.create(cv=cv, initial=rejected_from)
+
+        reviewed_count = AppliedCandidates.objects.filter(post=post, status='Pending').count()
+        if reviewed_count == 0:
+            cvs = AppliedCandidates.objects.filter(post=post, status='Rejected')
+            for cv in cvs:
+                feedback = Feedback.objects.get(cv=cv)
+                feedback.final = generate_final_feedback(cv)
+                feedback.save()
 
         Notification.objects.create(user=user, title=f"Your CV status has been updated to {s}")
 
