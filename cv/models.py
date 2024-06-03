@@ -21,7 +21,7 @@ class AppliedCandidates(models.Model):
 class Feedback(models.Model):
     cv = models.ForeignKey(AppliedCandidates, on_delete=models.CASCADE)
     initial = models.TextField()
-    final = models.TextField(blank=True, null=True)
+    final = models.JSONField(blank=True, null=True)
 
     def __str__(self):
         return f"Feedback for {self.cv}"

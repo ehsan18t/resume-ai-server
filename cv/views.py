@@ -82,13 +82,13 @@ def prepare(post, cv):
     here is the job post:
     {post}
 
-    can you find out possible reasons for rejection and provide detailed improvement feedback in the following format and return valid json object so that it can actully help the canditate? 
+    can you find out possible reasons for rejection and provide detailed improvement feedback so that it can actually help the canditate in the following json structure? 
 
     "report":
         "reason": string | null,
         "improvement_suggestion": string | null,
 
-        if no info available for a section, return null
+        if no info available for a section, return null. do not return markdown (like, #, **, __) or html, just plain text
     """)
     model = genai.GenerativeModel(model_name="gemini-1.5-pro-latest",
                                   generation_config=generation_config,
@@ -109,7 +109,7 @@ def generate_final_feedback(cv):
     serialized_profile = UserProfileSerializer(profile, many=False)
     profile_json = json.dumps(serialized_profile.data)
 
-    return prepare(post_json, profile_json)
+    return json.loads(prepare(post_json, profile_json))
 
 
 @api_view(['POST'])
