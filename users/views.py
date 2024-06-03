@@ -1,4 +1,5 @@
-from datetime import datetime, timezone
+from django.utils import timezone
+import pytz
 import json
 
 from django.conf import settings
@@ -327,7 +328,7 @@ def pdf_to_profile(request):
 
             # Add the user information to the json_obj
             json_obj['user'] = request.user.id
-            current_time_utc = datetime.now(timezone.utc)
+            current_time_utc = timezone.now().astimezone(pytz.UTC)
             json_obj["created_at"] = current_time_utc
             json_obj["updated_at"] = current_time_utc
 
